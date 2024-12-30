@@ -1,28 +1,38 @@
-const myLibrary = [];
+class Book {
+    // Classes are meant to encapsulate functionality and data. Using a global variable defeats this purpose and breaks the idea of keeping your Book logic self-contained
+    static myLibrary = []; //static keeps the library logically tied to the Book class, meaning it’s only accessible via the class
 
-function Book(title, author, numOfPages, read) {
-    this.title = title;
-    this.author = author;
-    this.numOfPages = numOfPages;
-    this.read = read;
-    this.info = function info(){
-        console.log(this.title, "by", this.author, this.numOfPages,"of pages", this.read)
-    };
+    constructor(title, author, numOfPages, read) {
+        this.title = title;
+        this.author = author;
+        this.numOfPages = numOfPages;
+        this.read = read;
+    }
+    info() {
+        console.log(this.title, this.author, this.numOfPages, this.read);
+    }
+    static addBookToLibrary(title, author, numOfPages, read) {
+        // create a book from the arguments
+        const newBook = new Book(title, author, numOfPages, read);
+        Book.myLibrary.push(newBook); // myLibrary is static meaning it's a property of the class itself not just any instance meaning you have to use the className in order to access it.
+    
+        Book.myLibrary.forEach(book => book.info());
+    }
+    static theLibrary(){
+        console.log("This is your library", Book.myLibrary);
+    }
 }
-const Hobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, 'not read yet')
-Hobbit.info()
+/* This is how you call constructors/methods from the class if you create an instance
+const lib = new Book("Candy Town", "John Doe", 267, "read");
+lib.info();
+lib.addBookToLibrary("Another Book", "John Doe", 123, "not read");
+lib.addBookToLibrary("book3", "John Doe", 64, "read");
+lib.theLibrary();
+*/
+// But because the methods in the class are static methods you don't have to create an instance in order to use them
+Book.addBookToLibrary("1984", "George Orwell", 328, "read"); // non static methods require an instance
+//Static methods belong to the class itself, so they can be called directly with Book.addBookToLibrary
 
-
-function addBookToLibrary(title, author, numOfPages, read) {
-    // create a book from the arguments
-    const newBook = new Book(title, author, numOfPages, read);
-    myLibrary.push(newBook);
-
-    myLibrary.forEach(book => book.info());
-}
-
-addBookToLibrary("1984", "George Orwell", 328, "read");
-addBookToLibrary("To Kill a Mockingbird", "Harper Lee", 281, "not read yet");
 
 
 // Add a “New Book” button that brings up a form allowing users to input the details for the new book and add it to the library.
@@ -63,11 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         console.log(`Captured data: ${title}, ${author}, ${numOfPages}, ${read}`); 
 
-        addBookToLibrary(title, author, numOfPages, read)
+        Book.addBookToLibrary(title, author, numOfPages, read)
 
-        console.log(myLibrary)
+        console.log(Book.myLibrary)
 
-        console.log("Updated books array:", myLibrary);
+        console.log("Updated books array:", Book.myLibrary);
 
         bookForm.reset();
         popupForm.style.display = 'none';
@@ -81,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
        
         libraryContainer.innerHTML = '';
 
-        myLibrary.forEach((book, index) => {
+        Book.myLibrary.forEach((book, index) => {
             
             
             const bookDiv = document.createElement('div');
@@ -118,12 +128,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // function to remove book
     function removeBookFromLibrary(index) {
-        myLibrary.splice(index, 1); // Remove the book at the specified index
+        Book.myLibrary.splice(index, 1); // Remove the book at the specified index
         showLibrary(); // Re-render the library
     }    
     // function to change status
     function changeStatus(index) {
-        const book = myLibrary[index];
+        const book = Book.myLibrary[index];
         book.read = book.read === 'read' ? 'not read yet' : 'read';
         showLibrary(); // Re-render the library to reflect the status change
     }
