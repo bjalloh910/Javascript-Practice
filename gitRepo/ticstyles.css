@@ -1,0 +1,16 @@
+.gameboard {
+    display: grid;
+    grid-template-columns: repeat(3, 100px); /* Adjust based on number of columns */
+    grid-gap: 5px;
+}
+.cell {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000;
+    font-size: 24px;
+    text-align: center;
+}
+
