@@ -1,0 +1,56 @@
+body {
+    background-color: rebeccapurple;
+  }
+  
+  h1 {
+    color: white;
+    text-align: center;
+  }
+  
+  p {
+    font-family: verdana;
+    font-size: 20px;
+  }
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid;
+    border-radius: 50% 20% / 10% 40%;
+    background-color: rgb(95, 95, 149);
+  }
+  .popup{
+    display: none; /* Hidden by default */
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    margin-top: 100px;
+    padding: 30px;
+    border-radius: 20px;
+  }
+
+  .popup-content {
+    background-color: burlywood;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 50px;
+    width: 300px;
+    height: 300px;
+  }
+
+  .close{
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+  }
